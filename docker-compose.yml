@@ -1,0 +1,59 @@
+version: '2'
+
+services:
+
+  proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /etc/nginx/vhost.d # to update vhost configuration
+      - /usr/share/nginx/html # to write challenge files
+      - /apps/web/ssl:/etc/nginx/certs:ro # update this to change cert location
+      - ./nginx.tmpl:/app/nginx.tmpl # Used to fix the upload limit issue for new themes
+
+  ssl-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: ssl-companion
+    volumes:
+      - /apps/web/ssl:/etc/nginx/certs:rw # same path as above, now RW
+    volumes_from:
+      - proxy
+    depends_on:
+      - proxy
+
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    volumes:
+      - 'mariadb_data:/bitnami'
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+
+  blog:
+    image: 'bitnami/ghost:latest'
+    expose:
+      - '2368'
+    depends_on:
+      - mariadb
+    environment:
+      - VIRTUAL_HOST=techvomit.net
+      - LETSENCRYPT_HOST=techvomit.net
+      - LETSENCRYPT_EMAIL=${GHOST_EMAIL}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - GHOST_EMAIL=${GHOST_EMAIL}
+      - GHOST_PASSWORD=${GHOST_PASSWORD}
+      - GHOST_HOST=techvomit.net
+      - GHOST_USERNAME=Jayson-Grace
+      - BLOG_TITLE=Tech Vomit 
+    volumes:
+      - 'ghost_data:/bitnami'
+    restart: always
+
+volumes:
+  mariadb_data:
+    driver: local
+  ghost_data:
+    driver: local
