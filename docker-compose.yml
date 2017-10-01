@@ -37,15 +37,15 @@ services:
     depends_on:
       - mariadb
     environment:
-      - VIRTUAL_HOST=techvomit.net
-      - LETSENCRYPT_HOST=techvomit.net
+      - VIRTUAL_HOST=${URL}
+      - LETSENCRYPT_HOST=${URL}
       - LETSENCRYPT_EMAIL=${GHOST_EMAIL}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - GHOST_EMAIL=${GHOST_EMAIL}
       - GHOST_PASSWORD=${GHOST_PASSWORD}
-      - GHOST_HOST=techvomit.net
-      - GHOST_USERNAME=Jayson-Grace
-      - BLOG_TITLE=Tech Vomit
+      - GHOST_HOST=${URL}
+      - GHOST_USERNAME=${GHOST_USERNAME}
+      - BLOG_TITLE=${BLOG_TITLE}
     volumes:
       - 'ghost_data:/bitnami'
     restart: always
