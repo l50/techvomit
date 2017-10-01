@@ -34,8 +34,8 @@ By doing this, you won't put static credentials into your compose file and accid
 MIT
 
 ### Resources
-https://blog.agchapman.com/ghost-blog-with-nginx-and-docker-1/
-https://blog.agchapman.com/ghost-blog-with-nginx-and-docker-2/
-https://blog.agchapman.com/upgrading-a-ghost-blog-with-nginx-and-docker-part-3-of-2/
-https://gist.github.com/agc93/b9984b8a3e552632447d60bae16fb6d7
-https://github.com/gregbkr/ghost-nginx-ssl-docker
+- https://blog.agchapman.com/ghost-blog-with-nginx-and-docker-1/
+- https://blog.agchapman.com/ghost-blog-with-nginx-and-docker-2/
+- https://blog.agchapman.com/upgrading-a-ghost-blog-with-nginx-and-docker-part-3-of-2/
+- https://gist.github.com/agc93/b9984b8a3e552632447d60bae16fb6d7
+- https://github.com/gregbkr/ghost-nginx-ssl-docker
