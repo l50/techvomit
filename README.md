@@ -20,7 +20,8 @@ The contents of the env file should look something like this:
 ```
 URL=yoursitehere
 MARIADB_ROOT_PASSWORD=passwordhere
-MARIADB_PASSWORD=passwordhere
+GHOST_DATABASE_USER=ghostdbuserhere
+GHOST_DATABASE_PASSWORD=passwordhere
 GHOST_PASSWORD=passwordhere
 GHOST_EMAIL=user@user.com
 GHOST_USERNAME=usernamehere
